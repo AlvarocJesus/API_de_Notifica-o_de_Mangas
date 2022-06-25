@@ -29,15 +29,13 @@ const mangaLinks = [
 async function Teste() {
 	const browser = await Puppeteer.launch({
 		headless: false,
-		// slowMo: 250,
-		devtools: true,
 	});
 	const page = await browser.newPage();
 
 	// await page.waitForNavigation();
 	await page.goto(mangaLinks[1]);
 
-	const actual_chapter = await page.evaluate((item) => {
+	const actual_chapter = await page.evaluate(() => {
 		return {
 			chapter: document.querySelector(
 				'div.chapter-selection-container div.chapter-selection span.current-chapter em'
