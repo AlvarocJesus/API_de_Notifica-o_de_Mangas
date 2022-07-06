@@ -36,14 +36,12 @@ async function Teste() {
 	await page.goto(mangaLinks[1]);
 
 	const actual_chapter = await page.evaluate(() => {
-		return {
-			chapter: document.querySelector(
-				'div.chapter-selection-container div.chapter-selection span.current-chapter em'
-			).innerText,
-		};
+		const nextChapter = document.querySelector('.chapter-next');
+
+		if (nextChapter.classList.contains('disabled')) return 'tem o disabled';
 	});
 
-	console.log('Capitulo', actual_chapter);
+	console.log(actual_chapter);
 
 	await browser.close();
 }
