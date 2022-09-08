@@ -1,8 +1,14 @@
-import { Router } from 'express';
+const { Router } = require('express');
+const MangasController = require('./mangas.controller');
 
 const MangaRoutes = Router();
 
-MangaRoutes.get('/mangas', () => {});
-MangaRoutes.post('/mangas', () => {});
+const mangasController = new MangasController();
 
-export default MangaRoutes;
+MangaRoutes.get('/mangas', mangasController.getManga);
+MangaRoutes.post('/mangas', mangasController.createManga);
+/* MangaRoutes.post('/mangas', (req, res)=>{
+  const a = req.
+}); */
+
+module.exports = MangaRoutes;

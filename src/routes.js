@@ -1,8 +1,15 @@
-import { Router } from 'express';
-import MangaRoutes from './mangas/mangas.routes';
+const { Router } = require('express');
+const MangaRoutes = require('./mangas/mangas.routes');
+const userRoutes = require('./users/users.routes');
 
 const routes = Router();
 
+routes.use(userRoutes);
 routes.use(MangaRoutes);
 
-export default routes;
+routes.get('/teste', (req, res) => {
+	console.log('entrou na primeira rota');
+	return res.json({ message: 'Oi' });
+});
+
+module.exports = routes;
