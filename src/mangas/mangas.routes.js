@@ -5,10 +5,8 @@ const MangaRoutes = Router();
 
 const mangasController = new MangasController();
 
-MangaRoutes.get('/mangas', mangasController.getManga);
 MangaRoutes.post('/mangas', mangasController.createManga);
-/* MangaRoutes.post('/mangas', (req, res)=>{
-  const a = req.
-}); */
+MangaRoutes.get('/mangas', mangasController.getManga);
+MangaRoutes.get('/mangas/:userId/:manga', mangasController.getMangaById);
 
 module.exports = MangaRoutes;
