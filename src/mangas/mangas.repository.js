@@ -25,7 +25,19 @@ class MangasRepository {
 
 	async getManga() {
 		try {
-			const mangas = await prisma.manga.findMany();
+			const mangas = await prisma.manga.findMany({ orderBy: { title: 'asc' } });
+
+			return mangas;
+		} catch (err) {
+			throw new Error(err);
+		}
+	}
+
+	async getMangaById(userId, mangaId) {
+		try {
+			const mangas = await prisma.manga.findUnique({
+				where: { id: mangaId, user_id: userId },
+			});
 
 			return mangas;
 		} catch (err) {

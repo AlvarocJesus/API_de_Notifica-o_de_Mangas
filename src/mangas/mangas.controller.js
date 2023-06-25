@@ -8,9 +8,9 @@ class MangasController {
 
 	async createManga(req, res) {
 		const mangaBody = req.body;
-		const { userid } = req.headers;
+		const { userId } = req.headers;
 
-		await mangasService.createManga(mangaBody, userid);
+		await mangasService.createManga(mangaBody, userId);
 
 		res.status(201).json({ result: 'Manga adicionado com sucesso' });
 	}
@@ -19,6 +19,13 @@ class MangasController {
 		const mangas = await mangasService.getManga();
 
 		return res.status(200).json({ result: mangas });
+	}
+
+	async getMangaById(req, res) {
+		const { userId, mangaId } = req.params;
+		const manga = await mangasService.getMangaById(userId, mangaId);
+
+		return res.status(200).json({ result: manga });
 	}
 }
 

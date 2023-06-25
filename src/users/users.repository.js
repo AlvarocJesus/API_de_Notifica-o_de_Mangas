@@ -1,14 +1,14 @@
 const { PrismaClient } = require('@prisma/client');
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 class UsersRepository {
-	/* constructor() {
+	constructor() {
 		this.prisma = new PrismaClient();
-	} */
+	}
 
 	async save(body) {
 		try {
-			return await prisma.user.create({
+			return await this.prisma.user.create({
 				data: {
 					name: body.name,
 					email: body.email,
@@ -22,7 +22,7 @@ class UsersRepository {
 
 	async findAll() {
 		try {
-			return await prisma.user.findMany({
+			return await this.prisma.user.findMany({
 				include: {
 					manga: true,
 				},
