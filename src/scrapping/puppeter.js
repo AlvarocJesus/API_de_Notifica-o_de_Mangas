@@ -28,7 +28,6 @@ const mangaLinks = [
 
 async function Teste(mangaLink) {
 	let cap = 0;
-	console.log({ mangaLink });
 	const browser = await Puppeteer.launch();
 	const page = await browser.newPage();
 
@@ -41,7 +40,6 @@ async function Teste(mangaLink) {
 			return item.classList;
 		}
 	);
-	console.log(teste);
 
 	if (!teste['1']) {
 		cap++;
