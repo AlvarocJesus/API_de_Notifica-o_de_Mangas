@@ -26,24 +26,32 @@ const mangaLinks = [
   'https://mangalivre.net/ler/eleceed/online/170589/1#/!page0'
 ];
 
-async function Teste() {
-  const browser = await Puppeteer.launch({
-    headless: false
-  });
+async function Teste(mangaLink) {
+  let cap = 0;
+  const browser = await Puppeteer.launch();
   const page = await browser.newPage();
 
-  // await page.waitForNavigation();
-  await page.goto(mangaLinks[1]);
+  await page.goto(mangaLink);
+  await page.waitForSelector('.chapter-next');
 
-  const actual_chapter = await page.evaluate(() => {
-    const nextChapter = document.querySelector('.chapter-next');
-
-    if (nextChapter.classList.contains('disabled')) return 'tem o disabled';
+  const teste = await page.$eval('.chapter-selection-container > .chapter-next', item => {
+    return item.classList;
   });
 
-  console.log(actual_chapter);
+  if (!teste['1']) {
+    cap++;
+  }
+
+  console.log('n tem proximo capitulo');
+  console.log({ cap });
 
   await browser.close();
 }
 
-Teste();
+async function a() {
+  for (let i = 0; i < mangaLinks.length; i++) {
+    await Teste(mangaLinks[i]);
+  }
+}
+
+a();
