@@ -24,6 +24,16 @@ class MangasService {
 
 		return mangas;
 	}
+
+	async getMangaById(userId, mangaId) {
+		const manga = this.mangasRepository.getMangaById(userId, mangaId);
+
+		if (!manga) {
+			throw new Error('Manga not found');
+		}
+
+		return manga;
+	}
 }
 
 module.exports = MangasService;
