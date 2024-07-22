@@ -1,9 +1,9 @@
 from time import sleep
 
 def add_manga():
-  file = open('mangas/mangas.csv', 'a+')
+  file = open('../mangas/mangas.csv', 'a+')
 
-  tipo = input('Indique se é um Anime ou Manga: ') # 'Manga' ou 'Anime'
+  tipo = input('Indique se é um Anime, ou Manga, ou Filme: ') # 'Manga' ou 'Anime' ou 'Filme'
   nome = input(f'Digite o nome do {tipo}: ') # 'One Piece'
   cap_atual = int(input('Digite o episodio em que esta: ')) # 1000
   total_caps = int(input('Digite o total de episodios: ')) # 1000
@@ -22,11 +22,11 @@ def add_manga():
     print('Anime adicionado com sucesso!')
 
 def list_manga():
-  print('\n')
-  file = open('mangas/mangas.csv', 'r')
+  print('\nSua lista de mangas, animes e filmes!')
+  file = open('../mangas/mangas.csv', 'r')
 
   for line in file.readlines():
-    print(line.strip())
+    print(line.strip().split(';')[1])
 
   file.close()
 
@@ -37,13 +37,13 @@ def update_manga():
 
   print('Manga atualizado com sucesso!')
 
+print('Bem-vindo a sua lista de mangas, animes e filmes!')
 while True:
-  print('Bem-vindo a sua lista de mangas e animes!')
   option = input("""
 Escolha uma ação:
-1 - Adicionar manga
-2 - Listar mangas
-3 - Atualizar manga
+1 - Adicionar
+2 - Listar
+3 - Atualizar
 4 - Sair\n
 """)
 
