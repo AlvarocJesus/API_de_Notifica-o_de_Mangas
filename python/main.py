@@ -1,7 +1,7 @@
 from time import sleep
 
 def add_manga():
-  file = open('../mangas/mangas.csv', 'a+')
+  file = open('mangas/mangas.csv', 'a+')
 
   tipo = input('Indique se é um Anime, ou Manga, ou Filme: ') # 'Manga' ou 'Anime' ou 'Filme'
   nome = input(f'Digite o nome do {tipo}: ') # 'One Piece'
@@ -23,7 +23,7 @@ def add_manga():
 
 def list_manga():
   print('\nSua lista de mangas, animes e filmes!')
-  file = open('../mangas/mangas.csv', 'r')
+  file = open('mangas/mangas.csv', 'r')
 
   for line in file.readlines():
     print(line.strip().split(';')[1])
