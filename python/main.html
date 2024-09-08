@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./front/style.css">
+  <title>Notify Manga</title>
+</head>
+
+<body>
+  <div id="muitos">
+    <input type="file" name="file" id="file">
+  </div>
+
+  <div id="umSo">
+    <form action="" method="post">
+      <div>
+        <select name="tipoSalvar" id="">
+          <option value="salvar" selected>Manga</option>
+          <option value="salvar" selected>Anime</option>
+          <option value="salvar" selected>Filme</option>
+        </select>
+
+        <div id="radioOption">
+          <input type="radio" id="manga" name="fav_language" value="HTML">
+          <label for="html">Manga</label><br>
+          <input type="radio" id="anime" name="fav_language" value="CSS">
+          <label for="css">Anime</label><br>
+          <input type="radio" id="filme" name="fav_language" value="JavaScript">
+          <label for="javascript">Filme</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="">Nome</label>
+        <input type="text" name="NomeManga" id="">
+      </div>
+
+      <div>
+        <label for="">cap_atual</label>
+        <input type="number" name="NomeManga" id="">
+      </div>
+
+      <div>
+        <label for="">total_caps</label>
+        <input type="number" name="NomeManga" id="">
+      </div>
+
+      <div>
+        <label for="">temp_atual</label>
+        <input type="number" name="NomeManga" id="">
+      </div>
+
+      <div>
+        <label for="">temp_total</label>
+        <input type="number" name="NomeManga" id="">
+      </div>
+
+      <div>
+        <label for="">url</label>
+        <input type="url" name="NomeManga" id="">
+      </div>
+
+      <div id="status">
+        <label for="status">Status</label>
+        <div id="statusoOption">
+          <input type="radio" id="Em Andamento" name="fav_language" value="Em Andamento">
+          <label for="Em Andamento">Em Andamento</label><br>
+          <input type="radio" id="Finalizado" name="fav_language" value="Finalizado">
+          <label for="Finalizado">Finalizado</label><br>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
