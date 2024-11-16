@@ -1,4 +1,5 @@
 node_modules/
 coverage/
 */notifyManga
-*/__pycache__
+__pycache__
+notifyManga/
