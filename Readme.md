@@ -1,4 +1,4 @@
-# Projeto do marcador de presenca automatico Gaviao
+<!-- # Projeto do marcador de presenca automatico Gaviao
 
 Este projeto visa criar um bot para marcar a presenca automaticamente em todas as aulas e/ou aulas especificas de todos os alunos que estao na base de dados
 
@@ -14,4 +14,4 @@ Este projeto visa criar um bot para marcar a presenca automaticamente em todas a
 | Autores                    |
 | -------------------------- |
 | Alvaro Coelho Jesus        |
-| Rodrigo Moreira Doraciotto |
+| Rodrigo Moreira Doraciotto | -->
