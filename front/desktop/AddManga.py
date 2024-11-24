@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 root = Tk()
-root.title('Gerenciador de Mangas')
+root.title('Adicionar Manga')
 # root.geometry('500x500')
 addManga = ttk.Frame(root, padding=10)
 addManga.grid()
@@ -15,8 +15,10 @@ ttk.Radiobutton(addManga, text='Manga', variable=tipo, value='Manga').grid(colum
 ttk.Radiobutton(addManga, text='Anime', variable=tipo, value='Anime').grid(column=1, row=0)
 ttk.Radiobutton(addManga, text='Filme', variable=tipo, value='Filme').grid(column=2, row=0)
 # tipo = input('Indique se é um Anime, ou Manga, ou Filme: ') # 'Manga' ou 'Anime' ou 'Filme'
-
-ttk.Label(addManga, text=f'Digite o nome do {tipo}:').grid(column=0, row=1)
+print(tipo.title())
+print(tipo)
+nomeLabel = ttk.Label(addManga, text=f'Digite o nome do {tipo}:').grid(column=0, row=1)
+print(nomeLabel)
 nome = ttk.Entry(addManga).grid(column=1, row=1)
 # nome = input(f'Digite o nome do {tipo}: ') # 'One Piece'
 
@@ -40,8 +42,12 @@ ttk.Label(addManga, text='Digite a url onde esta acompanhando:').grid(column=0, 
 nome = ttk.Entry(addManga).grid(column=1, row=6)
 # url = input('Digite a url onde esta acompanhando: ') # 'https://onepieceex.net/manga/one-piece-capitulo-1000/'
 
-ttk.Label(addManga, text=f'Digite o status do {tipo}, como Em Andamento ou Finalizado: ').grid(column=0, row=7)
-nome = ttk.Entry(addManga).grid(column=1, row=7)
+ttk.Label(addManga, text=f'Marque o status do {tipo}')
+status_manga = ''
+ttk.Radiobutton(addManga, text='Em Andamento', variable=status_manga, value='Em Andamento').grid(column=0, row=7)
+ttk.Radiobutton(addManga, text='Finalizado', variable=status_manga, value='Finalizado').grid(column=1, row=7)
 # status = input(f'Digite o status do {tipo}, como Em Andamento ou Finalizado: ') # 'Em andamento'
+
+ttk.Button(addManga, text='Adicionar', command=root.destroy).grid(column=1, row=8)
 
 root.mainloop()
