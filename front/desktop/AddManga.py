@@ -8,9 +8,6 @@ class AddManga:
 	def addManga(self, parent):
 		root = Toplevel(parent)
 		root.title('Adicionar Manga')
-		# root.geometry('500x500')
-		# addManga = ttk.Frame(root, padding=10)
-		# addManga.grid()
 
 		ttk.Label(root, text='Hello').pack() #.grid(column=0, row=0)
 		ttk.Button(root, text='Quit', command=root.destroy).pack() #.grid(column=1, row=0)
@@ -19,14 +16,11 @@ class AddManga:
 		ttk.Radiobutton(root, text='Manga', variable=tipo, value='Manga', command=self.alterTextTipo).pack() #.grid(column=0, row=0)
 		ttk.Radiobutton(root, text='Anime', variable=tipo, value='Anime', command=self.alterTextTipo).pack() #.grid(column=1, row=0)
 		ttk.Radiobutton(root, text='Filme', variable=tipo, value='Filme', command=self.alterTextTipo).pack() #.grid(column=2, row=0)
-		print(tipo.get())
 
 		nomeLabel = ttk.Label(root, text=f'Digite o nome do {tipo}:').pack() #.grid(column=0, row=1)
-		print(nomeLabel)
 		nameEntry = ttk.Entry(root)
 		nameEntry.pack() #.grid(column=1, row=1)
 		name = nameEntry.get()
-		print(name)
 
 		ttk.Label(root, text='Digite o episodio em que esta: ').pack() #.grid(column=0, row=2)
 		nome = ttk.Entry(root).pack() #.grid(column=1, row=2)
