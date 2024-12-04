@@ -1,5 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 from tkinter import *
 from tkinter import ttk
+from db.main import Database
 
 class AddManga:
 	def __init__(self):
@@ -42,7 +47,7 @@ class AddManga:
 		ttk.Radiobutton(root, text='Em Andamento', variable=status_manga, value='Em Andamento').pack() #.grid(column=0, row=7)
 		ttk.Radiobutton(root, text='Finalizado', variable=status_manga, value='Finalizado').pack() #.grid(column=1, row=7)
 
-		ttk.Button(root, text='Adicionar', command=root.destroy).pack() #.grid(column=1, row=8)
+		ttk.Button(root, text='Adicionar', command=self.saveManga).pack() #.grid(column=1, row=8)
 	
 	def alterTextTipo(self):
 		print(self.tipo.get())
@@ -56,3 +61,7 @@ class AddManga:
 			self.nomeLabel.config(text='Digite o nome do:')
 		print(self.nomeLabel)
 		print(self.nomeLabel.cget('text'))
+	
+	def saveManga(self):
+		db = Database.addManga(self, 'teste manga')
+		print(db)
