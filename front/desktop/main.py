@@ -3,17 +3,20 @@ from tkinter import *
 from tkinter import ttk
 from Menu import MyMenu
 from AddManga import AddManga
+from ListMangas import ListMangas
 
 def openPageAddManga():
-  # exec(open(f'{os.path.dirname(__file__)}\AddManga.py').read())
   AddManga().addManga(root)
+
+def openPageListMangas():
+  ListMangas().listMangas(root)
 
 root = Tk()
 root.title('Gerenciador de Manga')
 root.geometry('500x500')
 
 # criando barra de menu
-menu = MyMenu().createMenu(root, openPageAddManga)
+menu = MyMenu().createMenu(root, [openPageAddManga, openPageListMangas])
 
 main = ttk.Frame(root, padding=10)
 main.grid()
