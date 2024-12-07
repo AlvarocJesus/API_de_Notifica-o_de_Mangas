@@ -55,5 +55,6 @@ https://www.datacamp.com/pt/tutorial/gui-tkinter-python
   - [ ] listar tudo
   - [ ] listar detalhe
 - [ ] tipar
+- [ ] Adicionar Log
 
 ## Executar
