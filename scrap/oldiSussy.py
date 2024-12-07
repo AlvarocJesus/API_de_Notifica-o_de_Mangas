@@ -29,14 +29,14 @@ class OldiSussy:
 	def extract_data(self, soup):
 		try:
 			titulo = soup.find('div', class_='post-title').find('h1').text.strip()
-			capitulo_mais_novo = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a').text.strip()
+			capitulo_recente = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a').text.strip().split(' ')[-1]
 			ultimo_capitulo_link = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a')['href']
 
-			print(f'Titulo: {titulo}')			
-			print(f'Capitulo: {capitulo_mais_novo}')
+			print(f'Titulo: {titulo}')
+			print(f'Capitulo: {capitulo_recente}')
 			print(f'Link: {ultimo_capitulo_link}')
 
-			return { 'titulo': titulo, 'capitulo_mais_novo': unidecode(capitulo_mais_novo), 'ultimo_capitulo_link': ultimo_capitulo_link }
+			return { 'titulo': titulo, 'capitulo_mais_novo': capitulo_recente, 'ultimo_capitulo_link': ultimo_capitulo_link, 'total_capitulos': capitulo_recente }
 		except Exception as e:
 			print(f'Error: {e}')
 	
