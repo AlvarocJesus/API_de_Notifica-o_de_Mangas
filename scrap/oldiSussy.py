@@ -2,10 +2,12 @@ import bs4
 import json
 import requests
 from unidecode import unidecode
+from config.log.log import Log
 
 class OldiSussy:
 	def __init__(self):
 		print('OldiSussy')
+		Log().initLog('oldiSussy.log')
 
 	url = 'https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/'
 
@@ -22,9 +24,10 @@ class OldiSussy:
 			with open('teste.html', 'w', encoding='utf-8') as file:
 				file.write(soup.prettify())
 			
+			Log().log('info', 'Data retrieved successfully')
 			return soup
 		except Exception as e:
-			print(f'Error: {e}')
+			Log().log('error', f'Error: {e}')
 
 	def extract_data(self, soup):
 		try:
@@ -36,9 +39,10 @@ class OldiSussy:
 			print(f'Capitulo: {capitulo_recente}')
 			print(f'Link: {ultimo_capitulo_link}')
 
+			Log().log('info', 'Data extracted successfully')
 			return { 'titulo': titulo, 'capitulo_mais_novo': capitulo_recente, 'ultimo_capitulo_link': ultimo_capitulo_link, 'total_capitulos': capitulo_recente }
 		except Exception as e:
-			print(f'Error: {e}')
+			Log().log('error', f'Error: {e}')
 	
 	def format_data(self, data):
 		print(f'Data: {json.dumps(data, indent=2)}')
