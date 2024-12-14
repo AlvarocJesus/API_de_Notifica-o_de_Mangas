@@ -16,7 +16,7 @@ class Log:
 	def initLog(self, fileName):
 		print('initLog')
 		logger = logging.getLogger(__name__)
-		logging.basicConfig(filename=fileName, encoding = self.encoding, level = self.level, format=self.logFormat, datefmt=self.datefmt)
+		logging.basicConfig(filename=f'../../logs/{fileName}', encoding = self.encoding, level = self.level, format=self.logFormat, datefmt=self.datefmt)
 
 		return logger
 	
