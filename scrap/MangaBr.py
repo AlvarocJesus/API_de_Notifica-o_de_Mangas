@@ -4,11 +4,11 @@ import requests
 from unidecode import unidecode
 from config.log.log import Log
 
-class MangaOnline:
+class MangaBr:
 	def __init__(self):
-		Log().initLog('mangaOnline.log')
-
-	def get_data(self):
+		Log().initLog('mangaBr.log')
+	
+	def get_data(self, url):
 		try:
 			Log().log('info', 'Data retrieved successfully')
 			return None
@@ -18,9 +18,10 @@ class MangaOnline:
 	def extract_data(self):
 		try:
 			Log().log('info', 'Data extracted successfully')
+			return None
 		except Exception as e:
 			Log().log('error', f'Error: {e}')
-
+	
 	def format_data(self):
 		pass
 
