@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from db.main import Database
+from db.database import Database
 
 class ListMangas:
 	def __init__(self):
@@ -16,6 +16,6 @@ class ListMangas:
 		ttk.Label(root, text='Listar Mangas').pack()
 		ttk.Button(root, text='Quit', command=self.getDBMangas).pack()
 
-	def getDBMangas(self):
-		db = Database().getManga()
+	def getDBMangas(self, userId):
+		db = Database().getMyMangas(userId)
 		print(db)

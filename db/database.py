@@ -23,7 +23,7 @@ class Database:
 		except Exception as e:
 			Log().log('error', e)
 
-	def getManga(self):
+	def getAllManga(self):
 		print('Get manga')
 		conn, cursor = self.getEngine()
 		# engine = self.getEngine()
@@ -43,6 +43,17 @@ class Database:
 		except Exception as e:
 			Log().log('error', e)
 	
+	def getMyMangas(self, userId):
+		try:
+			conn, cursor = self.getEngine()
+			mangas = cursor.execute('select * from user_manga where user_id')
+			conn.commit()
+			conn.close()
+
+			return mangas
+		except Exception as e:
+			Log().log('error', e)
+
 	def getEngine(self):
 		try:
 			conn = psycopg2.connect('dbname=teste user=teste password=teste')
