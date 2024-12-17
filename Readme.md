@@ -70,7 +70,7 @@
 ### Outros
 
 - [ ] Tipar
-- [ ] Adicionar Log
+- [x] Adicionar Log
 
 ## Como Executar
 
