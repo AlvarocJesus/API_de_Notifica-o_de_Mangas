@@ -1,0 +1,54 @@
+--CREATE TABLE if not exists Manga
+--(
+--  id_manga INT NOT NULL,
+--  nome INT NOT NULL,
+--  total_caps INT NOT NULL,
+--  temporadas INT NOT NULL,
+--  tipo INT NOT NULL,
+--  PRIMARY KEY (id_manga)
+--);
+--
+--CREATE TABLE if not exists Usuario
+--(
+--  id_user INT NOT NULL,
+--  nome INT NOT NULL,
+--  PRIMARY KEY (id_user)
+--);
+--
+--CREATE TABLE if not exists Genero
+--(
+--  id_genero INT NOT NULL,
+--  genero INT NOT NULL,
+--  PRIMARY KEY (id_genero)
+--);
+
+--CREATE TABLE if not exists "User_Manga"
+--(
+--  atual_cap INT NOT NULL,
+--  atual_temporada INT NOT NULL,
+--  id_user INT NOT NULL,
+--  id_manga INT NOT NULL,
+--  PRIMARY KEY (id_user, id_manga),
+--  FOREIGN KEY (id_user) REFERENCES Usuario(id_user),
+--  FOREIGN KEY (id_manga) REFERENCES Manga(id_manga)
+--);
+--
+--CREATE TABLE if not exists Manga_Genero
+--(
+--  id_genero INT NOT NULL,
+--  id_manga INT NOT NULL,
+--  PRIMARY KEY (id_genero, id_manga),
+--  FOREIGN KEY (id_genero) REFERENCES Genero(id_genero),
+--  FOREIGN KEY (id_manga) REFERENCES Manga(id_manga)
+--);
+--
+--CREATE TABLE if not exists Site
+--(
+--  url INT NOT NULL,
+--  ativo INT NOT NULL,
+--  id_site INT NOT NULL,
+--  id_manga INT NOT NULL,
+--  PRIMARY KEY (id_site),
+--  FOREIGN KEY (id_manga) REFERENCES Manga(id_manga)
+--);
+
