@@ -63,5 +63,6 @@ class AddManga:
 		print(self.nomeLabel.cget('text'))
 	
 	def saveManga(self):
+		print('salvou')
 		db = Database.addManga(self, 'teste manga')
 		print(db)
