@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from tkinter import *
 from tkinter import ttk
-from db.main import Database
+from db.database import Database
 
 class AddManga:
 	def __init__(self):
