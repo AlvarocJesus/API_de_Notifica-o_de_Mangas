@@ -2,22 +2,27 @@ import psycopg2
 from config.log.log import Log
 
 class Database:
+	logger = None
+	
 	def __init__(self):
 		print('Database')
+		self.logger = Log().initLog('database.log')
 
 	def addManga(self, manga):
 		print(f'Data Manga: {manga}')
 		conn, cursor = self.getEngine()
 
 		try:
-			# cursor.execute('insert into manga (name, author, release_date) values (%s, %s, %s)')
-			# conn.commit()
-			# conn.close()
+			teste = cursor.execute('insert into manga (name, author, release_date) values (%s, %s, %s)')
+			conn.commit()
+			conn.close()
 
-			# Log().log('info', 'Manga added')
+			print(f'Teste: {teste}')
+
+			Log().log(self.logger, 'info', 'Manga added')
 			return True
 		except Exception as e:
-			Log().log('error', e)
+			Log().log(self.logger, 'error', e)
 
 	def getAllManga(self):
 		print('Get manga')
@@ -28,10 +33,10 @@ class Database:
 			conn.commit()
 			conn.close()
 
-			Log().log('info', 'Manga added')
+			Log().log(self.logger, 'info', 'Manga added')
 			return mangas
 		except Exception as e:
-			Log().log('error', e)
+			Log().log(self.logger, 'error', e)
 	
 	def getMyMangas(self, userId):
 		try:
@@ -42,15 +47,15 @@ class Database:
 
 			return mangas
 		except Exception as e:
-			Log().log('error', e)
+			Log().log(self.logger, 'error', e)
 
 	def getEngine(self):
 		try:
 			conn = psycopg2.connect('dbname=teste user=teste password=teste')
 			cursor = conn.cursor()
 
-			Log().log('info', 'Connection with database')
+			Log().log(self.logger, 'info', 'Connection with database')
 			return conn, cursor
 		except Exception as e:
-			Log().log('error', e)
+			Log().log(self.logger, 'error', e)
 		
