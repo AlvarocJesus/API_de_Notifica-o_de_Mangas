@@ -1,3 +1,4 @@
+import os
 import logging
 
 class Log:
@@ -5,6 +6,7 @@ class Log:
 	level = ''
 	logFormat = ''
 	datefmt = ''
+
 	
 	def __init__(self):
 		print('Log')
@@ -15,8 +17,19 @@ class Log:
 	
 	def initLog(self, fileName):
 		print('initLog')
+		log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../logs')
+		log_path = os.path.join(log_dir, fileName)
+		
 		logger = logging.getLogger(__name__)
-		logging.basicConfig(filename=f'../../logs/{fileName}', encoding = self.encoding, level = self.level, format=self.logFormat, datefmt=self.datefmt)
+		
+		logging.basicConfig(
+			filename= log_path,
+			filemode='a',
+			encoding = self.encoding,
+			level = self.level,
+			format=self.logFormat,
+			datefmt=self.datefmt
+		)
 
 		return logger
 	

@@ -10,11 +10,11 @@ class Database:
 		conn, cursor = self.getEngine()
 
 		try:
-			cursor.execute('insert into manga (name, author, release_date) values (%s, %s, %s)')
-			conn.commit()
-			conn.close()
+			# cursor.execute('insert into manga (name, author, release_date) values (%s, %s, %s)')
+			# conn.commit()
+			# conn.close()
 
-			Log().log('info', 'Manga added')
+			# Log().log('info', 'Manga added')
 			return True
 		except Exception as e:
 			Log().log('error', e)

@@ -3,5 +3,6 @@ coverage/
 */notifyManga
 __pycache__
 notifyManga/
+logs/
 
 teste.html
