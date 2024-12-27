@@ -108,8 +108,11 @@ insert into users (name) values ('Alvaro Coelho Jesus');
 
 
 
-select * from mangas m
-select * from genero g 
+select * from mangas m;
+select * from sites s;
+select * from manga_user mu; 
+
+--select * from genero g 
 
 insert into genero (genero)
 values

@@ -83,20 +83,18 @@ class AddManga:
 			'tipo': self.tipo.get(),
 			'nome': self.name.get(),
 			'total_episodios': int(self.cap_total.get()),
-			'total_temporadas': int(self.temp_total.get())
+			'total_temporadas': int(self.temp_total.get()),
+			'tipo': 11
 		}
-		print(mangaBody)
-
 		id_manga = Database().addManga(mangaBody)
 
-		print(f'{id_manga}')
+		print(f'id_manga: {id_manga}')
 
 		urlBody = {
 			'url': self.url.get(),
 			'id_manga': id_manga,
-			'status': self.status_manga.get()
+			'status': True
 		}
-		print(urlBody)
 		Database().addUrlManga(urlBody)
 
 		userMangaBody = {
@@ -105,7 +103,5 @@ class AddManga:
 			'temporada_atual': int(self.temp_atual.get()),
 			'id_user': 1
 		}
-		print(userMangaBody)
-
-		userManga = Database.addUserManga(userMangaBody)
+		userManga = Database().addUserManga(userMangaBody)
 		print(userManga)
