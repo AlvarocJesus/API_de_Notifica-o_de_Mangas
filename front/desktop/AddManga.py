@@ -97,7 +97,7 @@ class AddManga:
 			'status': self.status_manga.get()
 		}
 		print(urlBody)
-		Database().addManga(urlBody)
+		Database().addUrlManga(urlBody)
 
 		userMangaBody = {
 			'id_manga': id_manga,
@@ -107,5 +107,5 @@ class AddManga:
 		}
 		print(userMangaBody)
 
-		userManga = Database.addManga('teste manga')
+		userManga = Database.addUserManga(userMangaBody)
 		print(userManga)

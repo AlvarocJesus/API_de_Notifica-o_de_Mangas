@@ -105,3 +105,36 @@ ALTER TABLE "Manga_Genero" ADD FOREIGN KEY ("id_manga") REFERENCES "mangas" ("id
 select * from users u 
 --
 insert into users (name) values ('Alvaro Coelho Jesus'); 
+
+
+
+select * from mangas m
+select * from genero g 
+
+insert into genero (genero)
+values
+('Outro'),
+('Shounen'),
+('Shoujo'),
+('Hentai (Seijin)'),
+('Ecchi'),
+('Yaoi'),
+('Yuri'),
+('Gekigá'),
+('Seinen'),
+('Josei')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
