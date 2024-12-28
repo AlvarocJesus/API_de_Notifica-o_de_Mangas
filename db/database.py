@@ -120,3 +120,19 @@ class Database:
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
 		
+	def updataManga(self, manga):
+		try:
+			engine = self.getEngine()
+
+			with engine.connect() as conn:
+				updated = conn.execute(
+					text("""update manga set total_caps = :total_caps where name = :titulo"""),
+					{'total_caps': manga['total_caps'], 'titulo': manga['id_manga']}
+				)
+				conn.commit()
+				conn.close()
+			
+			Log().log(self.logger, 'info', 'Manga updated')
+			return updated
+		except Exception as e:
+			Log().log(self.logger, 'error', e)

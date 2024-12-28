@@ -114,18 +114,20 @@ select * from manga_user mu;
 
 --select * from genero g 
 
-insert into genero (genero)
-values
-('Outro'),
-('Shounen'),
-('Shoujo'),
-('Hentai (Seijin)'),
-('Ecchi'),
-('Yaoi'),
-('Yuri'),
-('Gekigá'),
-('Seinen'),
-('Josei')
+--insert into genero (genero)
+--values
+--('Outro'),
+--('Shounen'),
+--('Shoujo'),
+--('Hentai (Seijin)'),
+--('Ecchi'),
+--('Yaoi'),
+--('Yuri'),
+--('Gekigá'),
+--('Seinen'),
+--('Josei')
+
+alter table mangas 
 
 
 

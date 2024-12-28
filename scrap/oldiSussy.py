@@ -7,6 +7,7 @@ import json
 import requests
 from unidecode import unidecode
 from config.log.log import Log
+from db.database import Database
 
 class OldiSussy:
 	logger = None
@@ -50,12 +51,18 @@ class OldiSussy:
 		except Exception as e:
 			Log().log(self.logger, 'error', f'Error: {e}')
 	
-	def format_data(self, data):
+	def saveManga(self, data):
 		print(f'Data: {json.dumps(data, indent=2)}')
+		mangaUpdate = {
+			'titulo': data['titulo'],
+			'total_caps': data['capitulo_mais_novo']
+		}
+
+		Database().updataManga(mangaUpdate)
 
 	def run(self):
 		soup = self.get_data(self.url)
 		data = self.extract_data(soup)
-		self.format_data(data)
+		self.saveManga(data)
 
 OldiSussy().run()
