@@ -5,4 +5,5 @@ __pycache__
 notifyManga/
 logs/
 
-teste.html
+*/*.html
+*.html
