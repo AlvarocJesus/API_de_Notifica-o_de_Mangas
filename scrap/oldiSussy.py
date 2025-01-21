@@ -6,6 +6,7 @@ import bs4
 import json
 import requests
 from unidecode import unidecode
+
 from config.log.log import Log
 from db.database import Database
 
