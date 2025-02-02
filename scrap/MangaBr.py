@@ -10,7 +10,7 @@ from config.log.log import Log
 
 class MangaBr:
 	logger = None
-	url = 'https://mangabr.net/manga/ao-ashi'
+	# url = 'https://mangabr.net/manga/ao-ashi'
 
 	def __init__(self):
 		self.logger = Log().initLog('mangaBr.log')

@@ -17,7 +17,7 @@ class OldiSussy:
 		print('OldiSussy')
 		self.logger = Log().initLog('oldiSussy.log')
 
-	url = 'https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/'
+	# url = 'https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/'
 
 	"""  url = 'https://www.amazon.com.br/Monitor-Gamer-AOC-FreeSync-Q27G2/dp/B0C6FHZW5C'
 	preço amazon
@@ -66,4 +66,4 @@ class OldiSussy:
 		data = self.extract_data(soup)
 		self.saveManga(data)
 
-OldiSussy().run()
+# OldiSussy().run()

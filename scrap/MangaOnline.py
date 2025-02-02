@@ -12,8 +12,8 @@ from config.log.log import Log
 
 class MangaOnline:
 	logger = None
-	url = 'https://mangaonline.blog/manga/solo-leveling-ragnarok/'
-	url_chapters = 'https://mangaonline.blog/manga/solo-leveling-ragnarok/ajax/chapters/'
+	# url = 'https://mangaonline.blog/manga/solo-leveling-ragnarok/'
+	# url_chapters = 'https://mangaonline.blog/manga/solo-leveling-ragnarok/ajax/chapters/'
 
 	def __init__(self):
 		self.logger = Log().initLog('mangaOnline_blog.log')

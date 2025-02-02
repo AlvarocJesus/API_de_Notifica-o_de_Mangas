@@ -10,7 +10,7 @@ from config.log.log import Log
 
 class SussyToons:
 	logger = None
-	url = 'https://api-dev.sussytoons.site/obras/847'
+	# url = 'https://api-dev.sussytoons.site/obras/847'
 	
 	def __init__(self):
 		print('SussyToons')
@@ -83,10 +83,10 @@ class SussyToons:
 		except Exception as e:
 			Log().log(self.logger, 'error', f'Error: {e}')
 
-	def run(self):
-		soup = self.get_data(self.url)
+	def run(self, url):
+		soup = self.get_data(url)
 		data = self.extract_data(soup)
 		self.saveManga(data)
 
-SussyToons().run()
+# SussyToons().run()
 		

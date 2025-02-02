@@ -59,5 +59,5 @@ class ReadManga:
 		data = self.extract_data(soup)
 		self.saveManga(data)
 
-if __name__ == '__main__':
-	ReadManga().run('https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/')
+# if __name__ == '__main__':
+# 	ReadManga().run('https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/')
