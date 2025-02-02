@@ -176,7 +176,7 @@ Objetivo: Configurar um ambiente de produção para hospedar sua aplicação.
 - [ ] Implementar envio de notificações via e-mail.
 - [ ] Criar suporte para notificações via Telegram/Discord.
 
-### ✅ Configuração do Scraping com Celery + Redis:
+### ✅ Configuração do Scraping com Celery + Redis
 
 - [ ] Configurar Celery e Redis no projeto.
 - [ ] Criar um serviço de scraping assíncrono.
@@ -184,12 +184,12 @@ Objetivo: Configurar um ambiente de produção para hospedar sua aplicação.
 - [ ] Integrar o Celery à API Flask.
 - [ ] Criar endpoint para iniciar scraping e verificar status.
 
-### ✅ Banco de Dados e Armazenamento de Mangás:
+### ✅ Banco de Dados e Armazenamento de Mangás
 
 - [ ] Criar um modelo de banco de dados para armazenar mangás e capítulos.
 - [ ] Definir uma estratégia para armazenar novos capítulos encontrados.
 
-### ✅ Tarefas de Suporte:
+### ✅ Tarefas de Suporte
 
 - [ ] Criar logs para registrar execuções do scraping.
 - [ ] Melhorar tratamento de erros no scraping.
@@ -197,33 +197,33 @@ Objetivo: Configurar um ambiente de produção para hospedar sua aplicação.
 
 ## 🔹 Médio Prazo (1 mês)
 
-### ✅ Aprimoramento do Scraping:
+### ✅ Aprimoramento do Scraping
 
 - [ ] Melhorar sistema de logging e tratamento de erros no Celery.
 - [ ] Adicionar sistema de reintentos para falhas no scraping.
 - [ ] Criar suporte para múltiplos sites de mangás.
 - [ ] Implementar scraping adaptável (caso algum site mude sua estrutura).
 
-### ✅ Gerenciamento de Usuários e Notificações:
+### ✅ Gerenciamento de Usuários e Notificações
 
 - [ ] Criar sistema de autenticação e login.
 - [ ] Criar um painel para que usuários escolham os mangás que desejam seguir.
 - [ ] Adicionar personalização de notificações (frequência, canais preferidos).
 
-### ✅ Monitoramento e Gestão das Tarefas Assíncronas:
+### ✅ Monitoramento e Gestão das Tarefas Assíncronas
 
 - [ ] Criar um painel para monitorar status das tarefas de scraping no Celery.
 - [ ] Integrar um sistema para reiniciar tarefas com falhas automaticamente.
 
 ## 🔹 Longo Prazo (2-3 meses)
 
-### ✅ Escalabilidade e Performance:
+### ✅ Escalabilidade e Performance
 
 - [ ] Criar um sistema de filas para priorizar mangás mais populares.
 - [ ] Melhorar eficiência do scraping para reduzir carga no servidor.
 - [ ] Criar um cache para evitar re-scraping desnecessário.
 
-### ✅ Expansão do Projeto:
+### ✅ Expansão do Projeto
 
 - [ ] Criar um app mobile para acompanhar notificações.
 - [ ] Criar uma interface web para gerenciar preferências de usuários.
