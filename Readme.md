@@ -1,4 +1,4 @@
-# API de Notificacao de Mangas
+# MangaTracker
 
 Sistema em Python para acompanhar mangas/animes, coletar atualizacoes via scraping e notificar usuarios (Telegram), com base para API e interface desktop.
 
