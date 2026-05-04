@@ -8,15 +8,23 @@ import requests
 from unidecode import unidecode
 
 from config.log.log import Log
-from db.database import Database
+from infra.db.database import Database
 
-class ReadManga:
+class OldiSussy:
 	logger = None
 
 	def __init__(self):
-		pass
+		print('OldiSussy')
+		self.logger = Log().initLog('oldiSussy.log')
 
-	def get_manga(self, url):
+	# url = 'https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/'
+
+	"""  url = 'https://www.amazon.com.br/Monitor-Gamer-AOC-FreeSync-Q27G2/dp/B0C6FHZW5C'
+	preço amazon
+	print(soup.title)
+	print(soup.find('span', class_="a-price").find('span', class_="a-offscreen")) """
+
+	def get_data(self, url):
 		try:
 			html = requests.get(url)
 			soup = bs4.BeautifulSoup(html.text, 'html.parser')
@@ -28,20 +36,19 @@ class ReadManga:
 			return soup
 		except Exception as e:
 			Log().log(self.logger, 'error', f'Error: {e}')
-	
+
 	def extract_data(self, soup):
 		try:
 			titulo = soup.find('div', class_='post-title').find('h1').text.strip()
+			capitulo_recente = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a').text.strip().split(' ')[-1]
+			ultimo_capitulo_link = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a')['href']
+
 			print(f'Titulo: {titulo}')
-
-			# capitulo_recente = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a').text.strip().split(' ')[-1]
-			# ultimo_capitulo_link = soup.find('ul', class_='main version-chap no-volumn').find_all('li')[0].find('a')['href']
-
-			# print(f'Capitulo: {capitulo_recente}')
-			# print(f'Link: {ultimo_capitulo_link}')
+			print(f'Capitulo: {capitulo_recente}')
+			print(f'Link: {ultimo_capitulo_link}')
 
 			Log().log(self.logger, 'info', 'Data extracted successfully')
-			# return { 'titulo': titulo, 'capitulo_mais_novo': capitulo_recente, 'ultimo_capitulo_link': ultimo_capitulo_link, 'total_capitulos': capitulo_recente }
+			return { 'titulo': titulo, 'capitulo_mais_novo': capitulo_recente, 'ultimo_capitulo_link': ultimo_capitulo_link, 'total_capitulos': capitulo_recente }
 		except Exception as e:
 			Log().log(self.logger, 'error', f'Error: {e}')
 	
@@ -51,13 +58,12 @@ class ReadManga:
 			'titulo': data['titulo'],
 			'total_caps': data['capitulo_mais_novo']
 		}
-		# Database().updateManga(mangaUpdate)
-		# Database().closeConnection()
-	
-	def run(self, url):
-		soup = self.get_manga(url)
+
+		Database().updataManga(mangaUpdate)
+
+	def run(self):
+		soup = self.get_data(self.url)
 		data = self.extract_data(soup)
 		self.saveManga(data)
 
-# if __name__ == '__main__':
-# 	ReadManga().run('https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/')
+# OldiSussy().run()

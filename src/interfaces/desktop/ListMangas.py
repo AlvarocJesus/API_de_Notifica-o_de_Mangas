@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from db.database import Database
+from infra.db.database import Database
 
 class ListMangas:
 	def __init__(self):

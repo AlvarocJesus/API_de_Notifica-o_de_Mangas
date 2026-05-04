@@ -1,9 +1,9 @@
 import os
 from tkinter import *
 from tkinter import ttk
-from Menu import MyMenu
-from AddManga import AddManga
-from ListMangas import ListMangas
+from interfaces.desktop.Menu import MyMenu
+from interfaces.desktop.AddManga import AddManga
+from interfaces.desktop.ListMangas import ListMangas
 
 def openPageAddManga():
   AddManga().addManga(root)
