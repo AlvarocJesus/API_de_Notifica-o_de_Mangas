@@ -13,21 +13,30 @@ load_dotenv()
 class Database:
 	logger = None
 	
-	def __init__(self):
+	def __init__(self, database):
 		print('Database')
 		self.logger = Log().initLog('database.log')
+		self.database = os.getenv('DATABASE_URL') if database else os.getenv('SQLALCHEMY_DATABASE_URL')
 
-	def addManga(self, manga):
-		print(f'addManga: {manga}')
-		print(f'nome manga: {manga["nome"]}')
+	def getEngine(self):
+		try:
+			# conn = psycopg2.connect('dbname=postegre_notify_manga user=postegre_notify_manga_user password=8UesZFjtUpAtLGhcn7JZO8GrJlV0VZtN')
+			# cursor = conn.cursor()
+
+			engine = create_engine(self.database)
+
+			Log().log(self.logger, 'info', 'Connection with database')
+			# return conn, cursor
+			return engine
+		except Exception as e:
+			Log().log(self.logger, 'error', e)
+
+	def executeQuery(self, query, parameter={}):
 		engine = self.getEngine()
 
 		try:
 			with engine.connect() as conn:
-				teste = conn.execute(
-					text("""insert into mangas (name, total_caps, temporadas, tipo) values (:name, :total_caps, :temporadas, :tipo) returning id_manga"""),
-					{'name': manga['nome'], 'total_caps': manga['total_episodios'], 'temporadas': manga['total_temporadas'], 'tipo': manga['tipo']}
-				)
+				teste = conn.execute(text(query), parameter)
 
 				conn.commit()
 				insertedId = teste.scalar()
@@ -35,10 +44,21 @@ class Database:
 
 			print(f'Teste: {insertedId}')
 
-			Log().log(self.logger, 'info', f'Manga added with id {insertedId}')
+			# Log().log(self.logger, 'info', f'Manga added with id {insertedId}')
 			return insertedId
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
+
+	def addManga(self, manga):
+		print(f'addManga: {manga}')
+		print(f'nome manga: {manga["nome"]}')
+		
+		insertedId = self.executeQuery(
+			"""insert into mangas (name, total_caps, temporadas, tipo) values (:name, :total_caps, :temporadas, :tipo) returning id_manga""",
+			{'name': manga['nome'], 'total_caps': manga['total_episodios'], 'temporadas': manga['total_temporadas'], 'tipo': manga['tipo']}
+		)
+
+		return insertedId
 	
 	def addUrlManga(self, urlManga):
 		print(f'addManga: {urlManga}')
@@ -107,19 +127,6 @@ class Database:
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
 
-	def getEngine(self):
-		try:
-			# conn = psycopg2.connect('dbname=postegre_notify_manga user=postegre_notify_manga_user password=8UesZFjtUpAtLGhcn7JZO8GrJlV0VZtN')
-			# cursor = conn.cursor()
-
-			engine = create_engine(os.getenv('DATABASE_URL'))
-
-			Log().log(self.logger, 'info', 'Connection with database')
-			# return conn, cursor
-			return engine
-		except Exception as e:
-			Log().log(self.logger, 'error', e)
-		
 	def updataManga(self, manga):
 		try:
 			engine = self.getEngine()
