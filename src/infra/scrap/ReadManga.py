@@ -9,12 +9,14 @@ from unidecode import unidecode
 
 from config.log.log import Log
 from infra.db.database import Database
+from scrap import Scrap
 
 class ReadManga:
 	logger = None
 
 	def __init__(self):
 		pass
+		self.scrap = Scrap()
 
 	""" def get_manga(self, url):
 		try:
@@ -55,7 +57,8 @@ class ReadManga:
 		# Database().closeConnection()
 	
 	def run(self, url):
-		soup = self.get_manga(url)
+		# soup = self.get_manga(url)
+		soup = self.scrap.get_data(url)
 		data = self.extract_data(soup)
 		self.saveManga(data)
 

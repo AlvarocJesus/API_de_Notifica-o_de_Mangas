@@ -7,6 +7,7 @@ import json
 import requests
 from unidecode import unidecode
 from config.log.log import Log
+from scrap import Scrap
 
 class MangaBr:
 	logger = None
@@ -14,6 +15,7 @@ class MangaBr:
 
 	def __init__(self):
 		self.logger = Log().initLog('mangaBr.log')
+		self.scrap = Scrap()
 	
 	""" def get_data(self, url):
 		try:
@@ -56,7 +58,8 @@ class MangaBr:
 		print(json.dumps(data, indent=2))
 
 	def run(self):
-		soup = self.get_data(self.url)
+		# soup = self.get_data(self.url)
+		soup = self.scrap.get_data(self.url)
 		data = self.extract_data(soup)
 		self.format_data(data)
 

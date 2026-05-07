@@ -7,6 +7,7 @@ import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config.log.log import Log
+from scrap import Scrap
 
 class SussyToons:
 	logger = None
@@ -15,6 +16,7 @@ class SussyToons:
 	def __init__(self):
 		print('SussyToons')
 		self.logger = Log().initLog('sussyToons.log')
+		self.scrap = Scrap()
 
 	def get_data(self, url):
 		try:
@@ -84,7 +86,8 @@ class SussyToons:
 			Log().log(self.logger, 'error', f'Error: {e}')
 
 	def run(self, url):
-		soup = self.get_data(url)
+		# soup = self.get_data(url)
+		soup = self.scrap.get_data(url)
 		data = self.extract_data(soup)
 		self.saveManga(data)
 

@@ -9,6 +9,7 @@ from unidecode import unidecode
 
 from config.log.log import Log
 from infra.db.database import Database
+from scrap import Scrap
 
 class OldiSussy:
 	logger = None
@@ -16,6 +17,7 @@ class OldiSussy:
 	def __init__(self):
 		print('OldiSussy')
 		self.logger = Log().initLog('oldiSussy.log')
+		self.scrap = Scrap()
 
 	# url = 'https://oldi.sussytoons.com/manga/logando-10-000-anos-no-futuro/'
 
@@ -62,7 +64,8 @@ class OldiSussy:
 		Database().updataManga(mangaUpdate)
 
 	def run(self):
-		soup = self.get_data(self.url)
+		# soup = self.get_data(self.url)
+		soup = self.scrap.get_data(self.url)
 		data = self.extract_data(soup)
 		self.saveManga(data)
 

@@ -9,6 +9,7 @@ import json
 import requests
 from unidecode import unidecode
 from config.log.log import Log
+from scrap import Scrap
 
 class MangaOnline:
 	logger = None
@@ -17,6 +18,7 @@ class MangaOnline:
 
 	def __init__(self):
 		self.logger = Log().initLog('mangaOnline_blog.log')
+		self.scrap = Scrap()
 
 	""" def get_data(self, url):
 		try:
@@ -92,7 +94,8 @@ class MangaOnline:
 		print(json.dumps(data, indent=4))
 
 	def run(self):
-		soup = self.get_data(self.url)
+		# soup = self.get_data(self.url)
+		soup = self.scrap.get_data(self.url)
 		soup_chapters = self.get_data_chapters(self.url_chapters)
 		data = self.extract_data(soup, soup_chapters)
 		self.format_data(data)
