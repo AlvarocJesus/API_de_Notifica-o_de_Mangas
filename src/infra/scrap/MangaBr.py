@@ -15,7 +15,7 @@ class MangaBr:
 	def __init__(self):
 		self.logger = Log().initLog('mangaBr.log')
 	
-	def get_data(self, url):
+	""" def get_data(self, url):
 		try:
 			html = requests.get(url)
 			soup = bs4.BeautifulSoup(html.text, 'html.parser')
@@ -26,7 +26,7 @@ class MangaBr:
 			Log().log(self.logger, 'info', 'Data retrieved successfully')
 			return soup
 		except Exception as e:
-			Log().log(self.logger, 'error', f'Error: {e}')
+			Log().log(self.logger, 'error', f'Error: {e}') """
 	
 	def extract_data(self, soup):
 		try:

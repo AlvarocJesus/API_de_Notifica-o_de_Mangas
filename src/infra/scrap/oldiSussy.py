@@ -24,7 +24,7 @@ class OldiSussy:
 	print(soup.title)
 	print(soup.find('span', class_="a-price").find('span', class_="a-offscreen")) """
 
-	def get_data(self, url):
+	""" def get_data(self, url):
 		try:
 			html = requests.get(url)
 			soup = bs4.BeautifulSoup(html.text, 'html.parser')
@@ -35,7 +35,7 @@ class OldiSussy:
 			Log().log(self.logger, 'info', 'Data retrieved successfully')
 			return soup
 		except Exception as e:
-			Log().log(self.logger, 'error', f'Error: {e}')
+			Log().log(self.logger, 'error', f'Error: {e}') """
 
 	def extract_data(self, soup):
 		try:

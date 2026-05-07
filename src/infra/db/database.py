@@ -54,53 +54,63 @@ class Database:
 		print(f'nome manga: {manga["nome"]}')
 		
 		insertedId = self.executeQuery(
-			"""insert into mangas (name, total_caps, temporadas, tipo) values (:name, :total_caps, :temporadas, :tipo) returning id_manga""",
-			{'name': manga['nome'], 'total_caps': manga['total_episodios'], 'temporadas': manga['total_temporadas'], 'tipo': manga['tipo']}
+			"""insert into mangas (id, nome, url_origem, ultimo_capitulo_lancado, total_cap, data_ultima_verificacao, site_id) values (:id, :nome, :url_origem, :ultimo_capitulo_lancado, :total_cap, :data_ultima_verificacao, :site_id) returning id_manga""",
+			{
+				'id': manga['id'],
+				'nome': manga['nome'],
+				'url_origem': manga['url_origem'],
+				'ultimo_capitulo_lancado': manga['ultimo_capitulo_lancado'],
+				'total_cap': manga['total_cap'],
+				'data_ultima_verificacao': manga['data_ultima_verificacao'],
+				'site_id': manga['site_id']
+			}
 		)
 
 		return insertedId
 	
-	def addUrlManga(self, urlManga):
-		print(f'addManga: {urlManga}')
-		engine = self.getEngine()
-
-		try:
-			with engine.connect() as conn:
-				teste = conn.execute(
-					text("""insert into sites (url, "mangaId", ativo) values (:url, :id_manga, :status) returning id_site"""),
-					{'url': urlManga['url'], 'id_manga': urlManga['id_manga'], 'status': urlManga['status']}
-				)
-				conn.commit()
-				insertedId = teste.scalar()
-				conn.close()
-
-				print(f'Teste: {insertedId}')
-
-			Log().log(self.logger, 'info', f'Url manga added with id {insertedId}')
-			return insertedId
-		except Exception as e:
-			Log().log(self.logger, 'error', e)
-
 	def addUserManga(self, userManga):
 		print(f'addManga: {userManga}')
-		engine = self.getEngine()
+		
+		insertedId = self.executeQuery(
+			"""insert into manga_user (user_id,	manga_id,	capitulo_atual_usuario) values (:user_id,	:manga_id,	:capitulo_atual_usuario) returning id""",
+			{
+				'user_id': userManga['user_id'],
+				'manga_id': userManga['manga_id'],
+				'capitulo_atual_usuario': userManga['capitulo_atual_usuario']
+			}
+		)
+		
+		return insertedId
 
-		try:
-			with engine.connect() as conn:
-				teste = conn.execute(
-					text("""insert into manga_user ("mangaId", atual_cap, atual_temporada, "userId") values (:id_manga, :episodio_atual, :temporada_atual, :id_user) returning id"""),
-					{'id_manga': userManga['id_manga'], 'episodio_atual': userManga['episodio_atual'], 'temporada_atual': userManga['temporada_atual'], 'id_user': userManga['id_user']}
-				)
-				conn.commit()
-				insertedId = teste.scalar()
-				conn.close()
+	def addSiteManga(self, siteManga):
+		print(f'addManga: {siteManga}')
 
-				print(f'Teste: {insertedId}')
+		insertedId = self.executeQuery(
+			"""insert into sites (id,	nome,	url_base,	slug_script, ativo) values (:id, :nome, :url_base, :slug_script, :ativo) returning id""",
+			{
+				'id': siteManga['id'],
+				'nome': siteManga['nome'],
+				'url_base': siteManga['url_base'],
+				'slug_script': siteManga['slug_script'],
+				'ativo': siteManga['ativo']
+			}
+		)
 
-			Log().log(self.logger, 'info', f'User manga added with id {insertedId}')
-			return insertedId
-		except Exception as e:
-			Log().log(self.logger, 'error', e)
+		return insertedId
+	
+	def addUser(self, user):
+		print(f'addManga: {user}')
+
+		insertedId = self.executeQuery(
+			"""insert into users (id,	nome,	telegram_chat_id) values (:id, :nome, :telegram_chat_id) returning id""",
+			{
+				'id': user['id'],
+				'nome': user['nome'],
+				'telegram_chat_id': user['telegram_chat_id']
+			}
+		)
+
+		return insertedId
 
 	def getAllManga(self):
 		print('Get manga')

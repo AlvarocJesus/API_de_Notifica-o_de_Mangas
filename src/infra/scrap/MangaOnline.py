@@ -18,7 +18,7 @@ class MangaOnline:
 	def __init__(self):
 		self.logger = Log().initLog('mangaOnline_blog.log')
 
-	def get_data(self, url):
+	""" def get_data(self, url):
 		try:
 			html = requests.get(url)
 			soup = bs4.BeautifulSoup(html.text, 'html.parser')
@@ -29,7 +29,7 @@ class MangaOnline:
 			Log().log(self.logger, 'info', 'Data retrieved successfully')
 			return soup
 		except Exception as e:
-			Log().log(self.logger, 'error', f'Error: {e}')
+			Log().log(self.logger, 'error', f'Error: {e}') """
 	
 	def get_data_chapters(self, url_chapters):
 		try:
