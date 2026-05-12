@@ -8,6 +8,7 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "fastapi>=0.136.1",
     "loguru>=0.7.3",
+    "odfpy>=1.4.1",
     "pandas>=3.0.2",
     "python-dotenv>=1.2.2",
     "requests>=2.33.1",

@@ -1,17 +1,73 @@
+# Dependências / ambientes
+.venv/
+venv/
+env/
+ENV/
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+
+# Cobertura e testes
+.coverage
+.coverage.*
+htmlcov/
+coverage/
+
+# Build / distribuição
+build/
+dist/
+site/
+.eggs/
+*.egg
+*.egg-info/
+
+# Logs
+logs/
+*.log
+
+# Banco de dados e arquivos gerados
+*.db
+*.sqlite
+*.sqlite3
+*.json
+*.csv
+*.xlsx
+*.ods
+*.zip
+*.txt
+*/*.html
+*.html
+
+# Configuração local e segredos
+.env
+.env.*
+*.local
+
+# IDEs / editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Projeto antigo / legado
+old/
+
+# Outros gerados pelo projeto
 node_modules/
 coverage/
 */notifyManga
-__pycache__
 notifyManga/
-logs/
-.env
-old/
-*.db
-
-*/*.html
-*.html
-*.txt
-*.csv
-*.xlsx
-*.log
-*.zip

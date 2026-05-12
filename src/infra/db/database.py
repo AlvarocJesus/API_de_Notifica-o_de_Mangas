@@ -2,8 +2,8 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-import psycopg2
-from sqlalchemy import create_engine, text
+# import psycopg2
+from sqlalchemy import create_engine, text, Base
 from dotenv import load_dotenv
 
 from config.log.log import Log
@@ -16,7 +16,7 @@ class Database:
 	def __init__(self, database):
 		print('Database')
 		self.logger = Log().initLog('database.log')
-		self.database = os.getenv('DATABASE_URL') if database else os.getenv('SQLALCHEMY_DATABASE_URL')
+		self.database = os.getenv('DATABASE_URL') if database else os.getenv('SQLITE_DATABASE_URL')
 
 	def getEngine(self):
 		try:
@@ -153,3 +153,20 @@ class Database:
 			return updated
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
+
+	def resetar_banco(self):
+		engine = self.getEngine()
+		print("🗑️ Apagando todas as tabelas...")
+		# Esse comando procura todas as tabelas mapeadas no Base e dropa do banco
+		Base.metadata.drop_all(bind=engine)
+		
+		print("✨ Recriando as tabelas com a nova estrutura...")
+		# Esse comando cria tudo de novo
+		Base.metadata.create_all(bind=engine)
+		
+		print("✅ Banco resetado com sucesso!")
+
+if __name__ == "__main__":
+	pass
+	# db = Database(database=False)
+	# db.resetar_banco()

@@ -10,7 +10,7 @@ load_dotenv()
 
 # connect_args={"check_same_thread": False} é uma configuração necessária só para o SQLite 
 # não dar erro quando usado em APIs (como FastAPI ou Flask)
-engine = create_engine(os.getenv('SQLALCHEMY_DATABASE_URL'), connect_args={"check_same_thread": False})
+engine = create_engine(os.getenv('SQLITE_DATABASE_URL'), connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -37,8 +37,8 @@ class Manga(Base):
 	data_ultima_verificacao = Column(DateTime, default=datetime.datetime.utcnow)
 	site_id = Column(Integer, ForeignKey('sites.id'))
 
-	site = relationship('Sites', back_populates='mangas')
-	leitores = relationship('UsuarioManga', back_populates='mangas')
+	site = relationship('Site', back_populates='mangas')
+	leitores = relationship('UserManga', back_populates='manga')
 
 class User(Base):
 	__tablename__ = 'users'
