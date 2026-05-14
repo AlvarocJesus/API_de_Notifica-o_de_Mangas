@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 # import psycopg2
-from sqlalchemy import create_engine, text, Base
+from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
 from config.log.log import Log
@@ -13,7 +13,7 @@ load_dotenv()
 class Database:
 	logger = None
 	
-	def __init__(self, database):
+	def __init__(self, database=True):
 		print('Database')
 		self.logger = Log().initLog('database.log')
 		self.database = os.getenv('DATABASE_URL') if database else os.getenv('SQLITE_DATABASE_URL')
@@ -41,18 +41,11 @@ class Database:
 				conn.commit()
 				insertedId = teste.scalar()
 				conn.close()
-
-			print(f'Teste: {insertedId}')
-
-			# Log().log(self.logger, 'info', f'Manga added with id {insertedId}')
 			return insertedId
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
 
 	def addManga(self, manga):
-		print(f'addManga: {manga}')
-		print(f'nome manga: {manga["nome"]}')
-		
 		insertedId = self.executeQuery(
 			"""insert into mangas (id, nome, url_origem, ultimo_capitulo_lancado, total_cap, data_ultima_verificacao, site_id) values (:id, :nome, :url_origem, :ultimo_capitulo_lancado, :total_cap, :data_ultima_verificacao, :site_id) returning id_manga""",
 			{
@@ -69,8 +62,6 @@ class Database:
 		return insertedId
 	
 	def addUserManga(self, userManga):
-		print(f'addManga: {userManga}')
-		
 		insertedId = self.executeQuery(
 			"""insert into manga_user (user_id,	manga_id,	capitulo_atual_usuario) values (:user_id,	:manga_id,	:capitulo_atual_usuario) returning id""",
 			{
@@ -83,8 +74,6 @@ class Database:
 		return insertedId
 
 	def addSiteManga(self, siteManga):
-		print(f'addManga: {siteManga}')
-
 		insertedId = self.executeQuery(
 			"""insert into sites (id,	nome,	url_base,	slug_script, ativo) values (:id, :nome, :url_base, :slug_script, :ativo) returning id""",
 			{
@@ -99,8 +88,6 @@ class Database:
 		return insertedId
 	
 	def addUser(self, user):
-		print(f'addManga: {user}')
-
 		insertedId = self.executeQuery(
 			"""insert into users (id,	nome,	telegram_chat_id) values (:id, :nome, :telegram_chat_id) returning id""",
 			{
@@ -112,8 +99,7 @@ class Database:
 
 		return insertedId
 
-	def getAllManga(self):
-		print('Get manga')
+	""" def getAllManga(self):
 		conn, cursor = self.getEngine()
 
 		try:
@@ -135,7 +121,7 @@ class Database:
 
 			return mangas
 		except Exception as e:
-			Log().log(self.logger, 'error', e)
+			Log().log(self.logger, 'error', e) """
 
 	def updataManga(self, manga):
 		try:
@@ -154,19 +140,30 @@ class Database:
 		except Exception as e:
 			Log().log(self.logger, 'error', e)
 
+	def deactivateMangaSite(self, siteUrl=None):
+		try:
+			print(f'Deactivating site: {siteUrl}')
+			self.executeQuery(
+				'update sites set ativo = 0 where url_base = :siteUrl',
+				{'siteUrl': siteUrl}
+			)
+		except Exception as e:
+			Log().log(self.logger, 'error', e)
+
 	def resetar_banco(self):
-		engine = self.getEngine()
-		print("🗑️ Apagando todas as tabelas...")
-		# Esse comando procura todas as tabelas mapeadas no Base e dropa do banco
-		Base.metadata.drop_all(bind=engine)
+		# engine = self.getEngine()
+		# print("🗑️ Apagando todas as tabelas...")
+		# # Esse comando procura todas as tabelas mapeadas no Base e dropa do banco
+		# Base.metadata.drop_all(bind=engine)
 		
-		print("✨ Recriando as tabelas com a nova estrutura...")
-		# Esse comando cria tudo de novo
-		Base.metadata.create_all(bind=engine)
+		# print("✨ Recriando as tabelas com a nova estrutura...")
+		# # Esse comando cria tudo de novo
+		# Base.metadata.create_all(bind=engine)
 		
-		print("✅ Banco resetado com sucesso!")
+		# print("✅ Banco resetado com sucesso!")
+		pass
 
 if __name__ == "__main__":
-	pass
-	# db = Database(database=False)
-	# db.resetar_banco()
+	# pass
+	db = Database(database=False)
+	db.deactivateMangaSite()

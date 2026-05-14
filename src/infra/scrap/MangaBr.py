@@ -1,21 +1,23 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import bs4
 import json
 import requests
 from unidecode import unidecode
-from config.log.log import Log
 from scrap import Scrap
+from config.log.log import Log
+from infra.db.database import Database
 
 class MangaBr:
 	logger = None
 	# url = 'https://mangabr.net/manga/ao-ashi'
 
 	def __init__(self):
+		print('MangaBr')
 		self.logger = Log().initLog('mangaBr.log')
-		self.scrap = Scrap()
+		self.database = Database(database=False)
 	
 	""" def get_data(self, url):
 		try:
@@ -30,19 +32,18 @@ class MangaBr:
 		except Exception as e:
 			Log().log(self.logger, 'error', f'Error: {e}') """
 	
-	def extract_data(self, soup):
+	def extract_data(self, soup, url):
 		try:
+			print(f'Lista: {soup.find('div', class_='col-12 chapters-list')}')
+			if soup.find('div', class_='col-12 chapters-list') is None:
+				print('Chapter list not found') # Log para depuração
+				self.database.deactivateMangaSite(url)
+				Log().log(self.logger, 'warning', 'Chapter list not found')
+				return None
+
 			titulo = soup.find('title').text.strip().split(' - ')[0]
-			# soup.find('h1', class_='mb-0 d-inline-block h2').text.strip()
-			print(f'Titulo: {titulo}')
 			ultimo_capitulo = ' '.join(soup.find('div', class_='col-12 chapters-list').find_all('div')[0].find('a').find('h5').text.strip().replace(' ', '').split('\n')[:2])
-			print(f'Ultimo capitulo: {ultimo_capitulo}')
 			url_ultimo_capitulo = soup.find('div', class_='col-12 chapters-list').find_all('div')[0].find('a')['href']
-			print(f'Url ultimo capitulo: {url_ultimo_capitulo}')
-			print(f'https://mangabr.net{url_ultimo_capitulo}')
-			
-			# data_ultimo_capitulo = soup.find('div', class_='col-12 chapters-list').find_all('div')[0].find('a').find('h5').text.strip().replace(' ', '').split('\n')[-1]
-			# print(f'Data ultimo capitulo: {data_ultimo_capitulo}')
 
 			Log().log(self.logger, 'info', 'Data extracted successfully')
 			return { 
@@ -51,17 +52,24 @@ class MangaBr:
 				'url_ultimo_capitulo': f'https://mangabr.net{url_ultimo_capitulo}'
 			}
 		except Exception as e:
+			print('Exception occurred') # Log para depuração
 			Log().log(self.logger, 'error', f'Error: {e}')
 	
 	def format_data(self, data):
 		print('Format data')
 		print(json.dumps(data, indent=2))
 
-	def run(self):
+	def run(self, url):
 		# soup = self.get_data(self.url)
-		soup = self.scrap.get_data(self.url)
-		data = self.extract_data(soup)
+		soup = Scrap(url).get_data()
+		if soup is None:
+			return None
+
+		data = self.extract_data(soup, url)
+		if data is None:
+			return None
+
 		self.format_data(data)
 
 if __name__ == '__main__':
-	MangaBr().run()
+	MangaBr().run('https://mangabr.net/manga/ao-ashi')
